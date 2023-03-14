@@ -7,13 +7,14 @@ function App() {
   const [items, setItems] = useState([
     { nome: 'Arroz', quantidade: 2, selecionado: false },
     { nome: 'Alcatra', quantidade: 3, selecionado: false },
-    { nome: 'Suco de Laranja', quantidade: 5, selecionado: false },
+    { nome: 'Suco de Laranja', quantidade: 5, selecionado: true },
   ])
+  const [inputValue, setInputValue] = useState('')
 
-  const listaDeItems = items.map(item =>
+  const listaDeItems = items.map((item,index) =>
     
     // Item
-    <div className='flex items-center justify-between border-b-2 border-dashed'>
+    <div className='flex items-center justify-between border-b-2 border-dashed' key={index}>
       
       {/* CheckBox e Nome */}
       <div className='flex py-2  gap-2 items-center'>
@@ -43,6 +44,16 @@ function App() {
     </div>
   )
 
+  const botaoAddItem = () => {
+    const novoItem = {
+      nome: inputValue,
+      quantidade: 1,
+      selecionado: false
+    }
+    const novosItems = [...items,novoItem]
+    setItems(novosItems)
+  }
+
   return (
     <main className="bg-gradient-to-r from-moonlitAsteroid-100 via-moonlitAsteroid-200 to-moonlitAsteroid-300 text-slate-200 text-xl">
       <section className='min-h-screen flex justify-center items-center'>
@@ -52,8 +63,8 @@ function App() {
 
           {/* Campo de Texto:Adicionar Item */}
           <div className='flex bg-gradient-to-r from-sky-300 to-blue-300 rounded-md py-2 px-4 mb-4'>
-            <input className=' placeholder:text-slate-200 placeholder:font-bold bg-transparent  outline-none' placeholder='Adicionar Item. . .' />
-            <FaPlus className=' self-center' />
+            <input value={inputValue} onChange={e=> setInputValue(e.target.value)}  className='placeholder:text-slate-200 placeholder:font-bold bg-transparent  outline-none' placeholder='Adicionar Item. . .' />
+            <FaPlus className='self-center' onClick={()=>botaoAddItem()} />
           </div>
 
           {/* Lista de Itens */}
