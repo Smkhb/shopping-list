@@ -8,41 +8,44 @@ function App() {
       <section className='min-h-screen flex justify-center items-center'>
 
         <div>
-          <input placeholder='Add an item...' />
-          <FaPlus />
-        </div>
-
-        <div>
           <div>
-
-            <div>
-              {false ? (
-                <>
-                  <FaCheckCircle />
-                  <span>Item 1</span>
-                </>
-              ) : (
-                <>
-                  <FaCircle />
-                  <span>Item 1</span>
-                </>
-              )}
-            </div>
-
-            <div>
-              <button>
-                <FaChevronLeft />
-              </button>
-              <span> 1 </span>
-              <button>
-                <FaChevronRight />
-              </button>
-            </div>
-
+            <input placeholder='Add an item...' />
+            <FaPlus />
           </div>
+
+          <div>
+            <div>
+
+              <div>
+                {false ? (
+                  <>
+                    <FaCheckCircle />
+                    <span>Item 1</span>
+                  </>
+                ) : (
+                  <>
+                    <FaCircle />
+                    <span>Item 1</span>
+                  </>
+                )}
+              </div>
+
+              <div>
+                <button>
+                  <FaChevronLeft />
+                </button>
+                <span> 1 </span>
+                <button>
+                  <FaChevronRight />
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+          <div>Total: 6</div>
         </div>
 
-        <div>Total: 6</div>
 
       </section>
     </main>
