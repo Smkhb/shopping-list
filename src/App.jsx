@@ -48,6 +48,7 @@ function App() {
     const novosItems = [...items,novoItem];
     setItems(novosItems); 
     setInputValue('');
+    
   }
 
   const itemSelecionado = index => {
@@ -83,14 +84,14 @@ function App() {
   }
 
   return (
-    <main className="bg-gradient-to-r from-moonlitAsteroid-100 via-moonlitAsteroid-200 to-moonlitAsteroid-300 text-slate-200 text-xl">
+    <main className="bg-gradient-to-r from-moonlitAsteroid-100 via-moonlitAsteroid-200 to-moonlitAsteroid-300 text-slate-200 text-md md:text-2xl">
       <section className='min-h-screen flex justify-center items-center'>
 
         {/* Div Principal */}
-        <div className=' bg-cyan-700 py-8 px-4 rounded-md shadow-xl'>
+        <div className=' bg-cyan-700 py-6 px-2 rounded-md shadow-xl md:px-4'>
 
           {/* Campo de Texto:Adicionar Item */}
-          <div className='flex bg-gradient-to-r from-sky-300 to-blue-300 rounded-md py-2 px-4 mb-4'>
+          <div className='flex bg-gradient-to-r from-sky-300 to-blue-300 rounded-md py-2 px-2 mb-4 md:px-6'>
             <input value={inputValue} onChange={e=> setInputValue(e.target.value)}  className='placeholder:text-slate-200 placeholder:font-bold bg-transparent  outline-none' placeholder='Adicionar Item. . .' />
             <FaPlus className='self-center' onClick={()=>botaoAddItem()} />
           </div>
