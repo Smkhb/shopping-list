@@ -5,23 +5,19 @@ import { useState } from 'react';
 function App() {
 
   const [items, setItems] = useState([
-    { nome: 'Arroz', quantidade: 2, selecionado: false },
-    { nome: 'Alcatra', quantidade: 3, selecionado: false },
-    { nome: 'Suco de Laranja', quantidade: 5, selecionado: true },
+    { nome: 'Suco de Laranja', quantidade: 2, selecionado: false },
   ])
   const [inputValue, setInputValue] = useState('')
-
+  const [contagemTotalDeItems, setContagemTotalDeItems] = useState(2)
   const listaDeItems = items.map((item,index) =>
-    
-    // Item
     <div className='flex items-center justify-between border-b-2 border-dashed' key={index}>
       
       {/* CheckBox e Nome */}
-      <div className='flex py-2  gap-2 items-center'>
+      <div className='flex py-2  gap-2 items-center' onClick={()=> itemSelecionado(index)}>
         {item.selecionado ? (
           <>
             <FaCheckCircle />
-            <span>{item.nome}</span>
+            <span className=' line-through'>{item.nome}</span>
           </>
         ) : (
           <>
@@ -30,28 +26,60 @@ function App() {
           </>
         )}
       </div>
-
       {/* Setas e Quantidade */}
       <div className='bg-slate-200 text-cyan-700 rounded-2xl flex items-center gap-1 '>
         <button>
-          <FaChevronLeft />
+          <FaChevronLeft  onClick={()=> diminuirNumero(index)} />
         </button>
         <span>{item.quantidade}</span>
         <button>
-          <FaChevronRight />
+          <FaChevronRight onClick={()=> aumentarNumero(index)} />
         </button>
       </div>
     </div>
   )
-
+  
   const botaoAddItem = () => {
     const novoItem = {
       nome: inputValue,
       quantidade: 1,
       selecionado: false
-    }
-    const novosItems = [...items,novoItem]
+    };
+    const novosItems = [...items,novoItem];
+    setItems(novosItems); 
+    setInputValue('');
+  }
+
+  const itemSelecionado = index => {
+    const novosItems = [...items];
+    novosItems[index].selecionado = !novosItems[index].selecionado
     setItems(novosItems)
+  }
+
+  const diminuirNumero = index => {
+    const novosItems = [...items];
+    if(novosItems[index].quantidade==1){
+      novosItems.splice(index,1)
+      setItems(novosItems);
+    }
+    novosItems[index].quantidade--;
+    setItems(novosItems);
+    totalDeItems();
+  }
+
+  const aumentarNumero = index => {
+    const novosItems = [...items];
+    novosItems[index].quantidade++;
+    setItems(novosItems);
+    totalDeItems();
+
+  }
+
+  const totalDeItems = () => {
+    const contagemTotalDeItems = items.reduce((total, item)=>{
+      return total+item.quantidade;
+    },0)
+    setContagemTotalDeItems(contagemTotalDeItems);
   }
 
   return (
@@ -73,7 +101,7 @@ function App() {
           </div>
 
           {/* Total */}
-          <div className='text-end pt-2'>Total: 6</div>
+          <div className='text-end pt-2 font-bold'>Total: {contagemTotalDeItems}</div>
         </div>
 
       </section>
